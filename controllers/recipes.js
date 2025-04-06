@@ -1,4 +1,4 @@
-// controllers/recipes.js
+
 
 const express = require('express');
 const router = express.Router();
@@ -8,24 +8,25 @@ const Ingredient = require('../models/ingredient.js');
 const User = require('../models/user.js');
 
 
-// Index - GET /recipes
+
 router.get('/', async (req, res) => {
     try {
         if (!req.session.user) {
             return res.redirect('/auth/sign-in');
         }
         const recipes = await Recipe.find({owner: req.session.user._id}).populate('ingredients');
-        res.locals.recipes = recipes;   // Send recipes to the view via res.locals
+        res.locals.recipes = recipes;   
         res.render('recipes/index.ejs', { recipes }); 
-            // { recipes: currentUser.recipes})
+          
     } catch (error) {
         console.log(error);
         res.redirect('/');
     }
 });
 
+
   
-//New - GET /recipes/new
+
 router.get('/new', async (req, res) => {
     try {
         const ingredients = await Ingredient.find({});
@@ -36,12 +37,12 @@ router.get('/new', async (req, res) => {
     }
 });
 
-// Delete - DELETE /recipes/:id
+
 
 router.delete('/:id', async (req, res) => {
     try {
         const recipe = await Recipe.findById(req.params.id);
-        // Check if user owns this recipe
+       
         if (!recipe.owner || !recipe.owner.equals(req.session.user._id)) {
             return res.redirect('/recipes');
         }
@@ -54,11 +55,10 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-// Update - PUT /recipes/:id
 router.put('/:id', async (req, res) => {
     try {
         const recipe = await Recipe.findById(req.params.id);
-        // Check if user owns this recipe
+        
         if (!recipe.owner.equals(req.session.user._id)) {
             return res.redirect('/recipes');
         }
@@ -76,23 +76,6 @@ router.put('/:id', async (req, res) => {
 
 
 
-//create
-// router.post('/', async (req, res) => {
-//         try {
-//         req.body.owner = req.session.user._id;
-//         if (typeof req.body.ingredients === 'string') {
-//             req.body.ingredients = [req.body.ingredients];
-//         }
-//           const recipe = await Recipe.create(req.body);
-          
-//           res.redirect('/recipes');
-//         } catch (error) {
-//           console.log(error);
-//           res.redirect('/');
-//         }
-//       });
-
-// In controllers/recipes.js, within the create route
 
 router.post('/', async (req, res) => {
     try {
@@ -106,9 +89,9 @@ router.post('/', async (req, res) => {
     }
   });
   
-//edit route
 
-// Edit - GET /recipes/:id/edit
+
+
 router.get('/:id/edit', async (req, res) => {
     try {
         const recipe = await Recipe.findById(req.params.id);
@@ -126,7 +109,6 @@ router.get('/:id/edit', async (req, res) => {
 
 
 
-//show - GET /recipes/:id
 router.get('/:recipeId', async (req, res) => {
     try {
         const recipe = await Recipe.findById(req.params.recipeId).populate('ingredients').populate('owner');

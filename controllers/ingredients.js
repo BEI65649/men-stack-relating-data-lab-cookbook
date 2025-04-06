@@ -5,7 +5,7 @@ const User = require('../models/user.js');
 const Ingredient = require('../models/ingredient.js');
 
 
-// Index - GET /ingredients
+
 router.get('/', async (req, res) => {
     try {
         const ingredients = await Ingredient.find({});
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Create - POST /ingredients
+
 router.post('/', async (req, res) => {
     try {
         await Ingredient.create(req.body);

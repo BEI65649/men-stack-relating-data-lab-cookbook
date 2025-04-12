@@ -37,6 +37,8 @@ app.use(
   })
 );
 
+app.use(express.static('public'));
+
 // Custom middleware
 app.use(passUserToView);
 

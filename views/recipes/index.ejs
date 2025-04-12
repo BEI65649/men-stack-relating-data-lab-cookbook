@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Recipes</title>
+   
+    
   </head>
 
   <body>
@@ -29,4 +31,44 @@
     </ul>
     <% } %>
   </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Recipes</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+  <div class="container">
+    <header>
+      <h1>Welcome to My Recipes</h1>
+    </header>
+    <main>
+      <a href="/recipes/new" class="btn">Add New Recipe</a>
+      <% if (recipes.length == 0) { %>
+        <p>No recipes found. Please add some!</p>
+      <% } else { %>
+        <ul>
+          <% recipes.forEach(recipe => { %>
+            <li>
+              <a href="/recipes/<%= recipe._id %>"><%= recipe.name %></a>
+              <div>
+                <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-danger">Delete Recipe</button>
+                </form>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; 2025 Our Home Cookbook</p>
+  </footer>
+</body>
 </html>

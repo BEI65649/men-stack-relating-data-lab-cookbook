@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= recipe.name %></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= recipe.name %></title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <%- include('../partials/_navbar.ejs') %>
-    <h1> <%= recipe.name %> </h1>
-    
-        <div>
-            <h2> Instructions </h2>
-            <p> <%= recipe.instructions %> </p>
-        </div>
-   
-        <div>
-            <h2>Ingredients</h2>
+  <%- include('../partials/_navbar.ejs') %>
+  <div class="container">
+    <header>
+      <h1><%= recipe.name %></h1>
+    </header>
+    <main>
+      <div class="section">
+        <h2>Instructions</h2>
+        <p><%= recipe.instructions %></p>
+      </div>
+      <div class="section">
+        <h2>Ingredients</h2>
         <% if (recipe.ingredients && recipe.ingredients.length > 0) { %>
-            <ul>
-                <% recipe.ingredients.forEach(ingredient => { %>
-                    <li><%= ingredient.name %> - <%= ingredient.category %></li>
-                <% }) %>
-            </ul>
+          <ul>
+            <% recipe.ingredients.forEach(ingredient => { %>
+              <li><%= ingredient.name %> - <%= ingredient.category %></li>
+            <% }) %>
+          </ul>
         <% } else { %>
-            <p> No ingredients added to this recipe.</p>
+          <p>No ingredients added to this recipe.</p>
         <% } %>
-    </div>
-    <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
-        <button type="submit">Delete Recipe</button>
-    </div>
-      
-        <div>
-    <a href="/recipes/<%= recipe._id %>/edit">Edit Recipe</a>
-        </div>
-
-
-    
+      </div>
+      <div class="actions">
+        <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+          <button type="submit" class="btn btn-danger">Delete Recipe</button>
+        </form>
+        <a href="/recipes/<%= recipe._id %>/edit" class="btn">Edit Recipe</a>
+        <a href="/recipes" class="btn">Back to Recipes</a>
+      </div>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; 2025 Our Home Cookbook</p>
+  </footer>
 </body>
 </html>

@@ -1,28 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Recipe</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
 <body>
-    <%- include('../partials/_navbar.ejs') %>
-    <h1>Add a New Recipe</h1>
-    <form action="/recipes" method="POST">
-    
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" required />
+  <%- include('../partials/_navbar.ejs') %>
+  <div class="container">
+    <header>
+      <h1>Add a New Recipe</h1>
+    </header>
+    <main>
+      <form action="/recipes" method="POST">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" required />
         </div>
-        <div>
-            <label for="instructions">Instructions:</label>
-            <textarea name="instructions" id="instructions" required></textarea>
+        <div class="form-group">
+          <label for="instructions">Instructions:</label>
+          <textarea name="instructions" id="instructions" required></textarea>
         </div>
-        <div>
-            <label>Ingredients:</label>
-            <select multiple name="ingredients" required>
-                <% ingredients.forEach(ingredient => { %>
-                    <option value="<%= ingredient._id %>">
-                        <%= ingredient.name %>
-                    </option>
-                <% }) %>
-            </select>
+        <div class="form-group">
+          <label>Ingredients:</label>
+          <select multiple name="ingredients" required>
+            <% ingredients.forEach(ingredient => { %>
+              <option value="<%= ingredient._id %>">
+                <%= ingredient.name %>
+              </option>
+            <% }) %>
+          </select>
         </div>
-        <button type="submit">Create Recipe</button>
-    </form>
-    <a href="/recipes">Back to Recipes</a>
-    <a href="/">Back to Home</a>
+        <button type="submit" class="btn">Create Recipe</button>
+      </form>
+      <div class="links">
+        <a href="/recipes" class="btn">Back to Recipes</a>
+        <a href="/" class="btn">Back to Home</a>
+      </div>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; 2025 Our Home Cookbook</p>
+  </footer>
 </body>
+</html>

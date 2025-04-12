@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingredients</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingredients</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <%- include('../partials/_navbar.ejs') %>
-    <h1>Ingredients</h1>
-
-    <section>
+  <%- include('../partials/_navbar.ejs') %>
+  <div class="container">
+    <header>
+      <h1>Ingredients</h1>
+    </header>
+    <main>
+      <section class="form-section">
         <h2>Add New Ingredient</h2>
         <form action="/ingredients" method="POST">
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-    
-            <button type="submit">Add Ingredient</button>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <button type="submit" class="btn">Add Ingredient</button>
         </form>
-    </section>
+      </section>
 
-    <section>
+      <section class="list-section">
         <h2>All Ingredients</h2>
         <% if (ingredients.length === 0) { %>
-            <p>No ingredients added yet.</p>
+          <p>No ingredients added yet.</p>
         <% } else { %>
-            <ul>
-                <% ingredients.forEach(ingredient => { %>
-                    <li>
-                        <strong><%= ingredient.name %></strong>
-                    </li>
-                <% }) %>
-            </ul>
+          <ul>
+            <% ingredients.forEach(ingredient => { %>
+              <li>
+                <strong><%= ingredient.name %></strong>
+              </li>
+            <% }) %>
+          </ul>
         <% } %>
-    </section>
+      </section>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; 2025 Our Home Cookbook</p>
+  </footer>
 </body>
 </html>
